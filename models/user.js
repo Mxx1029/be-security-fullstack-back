@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { hash, compareHashes } from '../libs/crypto.js';
 
+// Helper variables
 const required = true;
 const unique = true;
 const { Schema } = mongoose;
@@ -14,7 +15,7 @@ const userSchema = new Schema({
 /**
  * This registers a new user into the database
  * @param {object} userData - User to create
- * @returns {object} - created User or null if it failed
+ * @returns {object} Created User or null if it failed
  */
 
 userSchema.statics.register = async (userData) => {
@@ -23,7 +24,7 @@ userSchema.statics.register = async (userData) => {
         return await User.create(userData); 
     } catch (error) {
         if (error.message.indexOf("email") !== -1) {
-            console.error("Error while registering user, email already registered"); // in production you should never email addresses into the log (data protection)
+            console.error("Error while registering user (email"); // in production you should never email addresses into the log (data protection)
         } else {
             console.error("Error while registering user: ", error.message); 
         }
@@ -33,8 +34,8 @@ userSchema.statics.register = async (userData) => {
 
 /** 
  * Try to login with provided user credentials
- * @param {object} userData - object containing email and password
- * @return {Promise<boolean>} - will resolve to user object if successful or null if not
+ * @param {object} userData - object containing email and password in plain text
+ * @return {Promise<object>} - will resolve to user object if successful or null if not
 */
 
 userSchema.statics.login = async (userData) => {
@@ -52,7 +53,7 @@ userSchema.statics.login = async (userData) => {
 };
 
 // instance method, so we have access to this variable <--> model methods above
-// this method also makes sure, that there's no password sent in the response!
+// this method also makes sure, that there's no password sent in the response! converts a User object to a simplefied JSON representation
 userSchema.methods.toJSON = function() {
     return {
         email: this.email,
