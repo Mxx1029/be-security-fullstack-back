@@ -1,0 +1,27 @@
+### Register new user
+POST http://localhost:8067/register
+Content-Type: application/json
+
+{
+    "email": "joelP@example.org",
+    "password": "123456"
+}
+// in a real project you would do: http://localhost:{{$processEnv PORT}} (or something like that, look in the documentation for REST client)
+
+### Login new user
+POST http://localhost:8067/login
+Content-Type: application/json
+
+{
+    "email": "joel@example.org",
+    "password": "123456"
+}
+
+### Send a message
+POST http://localhost:8067/message
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTZmZTBhNmY5Y2Y2YjhiZjU3ZjNjZTEiLCJpYXQiOjE2MzQ3MzEwNjR9.35xP2gPIJ7Wz5f8VnV_uzku5cvO3eHtepoSubMDNcCA
+
+{
+    "message": "Alea iacta est!"
+}
