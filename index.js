@@ -43,6 +43,7 @@ const checkLogin = (req, res, next) => {
 
 // File upload
 const uploadCheck = upload.fields([{ name: "selectedFile", maxCount: 1 }]);
+// TODO: Check login? --> put the checkLogin function as middleware into the endpoint to make it secure
 app.post('/file', checkLogin, uploadCheck, async (req, res) => {
     // TODO: Add mongo schema for files -- DONE 
     
@@ -56,9 +57,10 @@ app.post('/file', checkLogin, uploadCheck, async (req, res) => {
         return;
     }
     
-    // TODO: Check login? --> put the checkLogin function as middleware into the endpoint to make it secure
     res.json({ success: true }); // put a breakpoint here and use debugger to look at the req coming in if you upload a file in the frontend --> req.files[index] --> multer gives it a new hexadecimal filename
 })
+
+// TODO: File download (research...!)
 
 // Register new user
 app.post('/register', async (req, res) => {

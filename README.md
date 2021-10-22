@@ -16,3 +16,5 @@ Frontend part of this is at https://github.com/Mxx1029/be-security-fullstack-bac
 - add more secured endpoints for functionality
 - add a separate folder for middleware
 - add validation and sanitation for *all* endpoints
+- add fullName to users
+- implement file download
